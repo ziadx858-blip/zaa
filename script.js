@@ -1,128 +1,68 @@
-const questions = document.querySelectorAll(".question");
-const progress = document.getElementById("progressBar");
+const scriptURL =
+"https://script.google.com/macros/s/AKfycbzB7fB1tV19uhe5HZNT9NjcXAu0qYlEyPrBoaRoBuOPj92p2jfegwsFhKswW3G-zQIm6A/exec";
 
-let current = 0;
+const form=document.getElementById("quizForm");
 
-showQuestion(current);
+const audioInput=document.getElementById("audio");
 
-function showQuestion(index){
+const player=document.getElementById("player");
 
-    questions.forEach(q => q.classList.remove("active"));
+audioInput.addEventListener("change",function(){
 
-    questions[index].classList.add("active");
+const file=this.files[0];
 
-    progress.style.width = ((index + 1) / questions.length) * 100 + "%";
+if(file){
 
-}
-
-function nextQuestion(){
-
-    if(current < questions.length - 1){
-
-        current++;
-
-        showQuestion(current);
-
-    }
+player.src=URL.createObjectURL(file);
 
 }
-
-// زر No يهرب
-
-const noBtn = document.getElementById("noBtn");
-
-function moveNoButton(){
-
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-
-    noBtn.style.position = "fixed";
-    noBtn.style.left = Math.random() * maxX + "px";
-    noBtn.style.top = Math.random() * maxY + "px";
-
-}
-
-noBtn.addEventListener("mouseover", moveNoButton);
-
-noBtn.addEventListener("touchstart", function(e){
-
-    e.preventDefault();
-
-    moveNoButton();
 
 });
 
-// تشغيل الأغنية
+form.addEventListener("submit",async function(e){
 
-function playMusic(){
+e.preventDefault();
 
-    document.getElementById("song").play();
+const data={
 
-}
+name:document.getElementById("name").value,
 
-// Submit
+age:document.getElementById("age").value,
 
-function submitAnswers(){
+hobby:document.getElementById("hobby").value,
 
-    const name = document.getElementById("name").value;
-    const age = document.getElementById("age").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const place = document.getElementById("place").value;
-    const message = document.getElementById("message").value;
+message:document.getElementById("message").value,
 
-    const hobbies = [];
+date:new Date().toLocaleString()
 
-    document.querySelectorAll('input[type="checkbox"]:checked').forEach(item=>{
+};
 
-        hobbies.push(item.value);
+try{
 
-    });
+await fetch(scriptURL,{
 
-    console.log({
+method:"POST",
 
-        name,
-        age,
-        hobbies,
-        date,
-        time,
-        place,
-        message
+body:JSON.stringify(data)
 
-    });
+});
 
-    // احتفال 🎉
+document.body.innerHTML=`
 
-    confetti({
+<div class="thanks">
 
-        particleCount:250,
-        spread:180,
-        origin:{y:0.6}
+Thanks ya moza ❤️
 
-    });
+</div>
 
-    setTimeout(function(){
+`;
 
-        document.body.innerHTML = `
+}catch(err){
 
-        <div class="container">
+alert("Something went wrong!");
 
-        <h1>❤️ Thanks Ya Moza ❤️</h1>
-
-        <h2>You made my day 🥹❤️</h2>
-
-        <p style="margin-top:20px;font-size:20px;">
-        Can't wait to see you ❤️
-        </p>
-
-        <div style="font-size:45px;margin-top:25px;">
-        ❤️ 💖 💕 💗 💝
-        </div>
-
-        </div>
-
-        `;
-
-    },800);
+console.log(err);
 
 }
+
+});
