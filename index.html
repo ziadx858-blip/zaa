@@ -1,64 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hang Out With Me ❤️</title>
+
+<title>❤️ Hang Out With Me ❤️</title>
 
 <link rel="stylesheet" href="style.css">
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
 </head>
+
 <body>
 
 <div class="container">
 
-<h1>❤️ Hang Out With Me ❤️</h1>
+<div class="progress">
+<div id="progressBar"></div>
+</div>
 
 <form id="quizForm">
 
-<label>Your Name</label>
-<input type="text" id="name" required>
+<!-- Question 1 -->
 
-<label>Your Age</label>
-<input type="number" id="age" required>
+<div class="question active">
 
-<label>What do you like to do?</label>
+<h1>❤️ Hang Out With Me ❤️</h1>
 
-<select id="hobby">
+<h2>What's your name?</h2>
 
-<option value="Cooking">Cooking 🍳</option>
+<input
+type="text"
+id="name"
+placeholder="Your name"
+required>
 
-<option value="Sleeping">Sleeping 😴</option>
-
-<option value="Reading">Reading 📚</option>
-
-<option value="Listening to Music">Listening to Music 🎵</option>
-
-</select>
-
-<label>Write anything you want ❤️</label>
-
-<textarea id="message" rows="5"></textarea>
-
-<label>Choose your favorite song 🎵</label>
-
-<input type="file" id="audio" accept="audio/*">
-
-<br><br>
-
-<audio id="player" controls></audio>
-
-<br><br>
-
-<button type="submit">
-Submit ❤️
+<button type="button" onclick="nextQuestion()">
+Next ➜
 </button>
-
-</form>
 
 </div>
 
-<script src="script.js"></script>
+<!-- Question 2 -->
 
-</body>
-</html>
+<div class="question">
+
+<h2>How old are you? 🎂</h2>
+
+<input
+type="number"
+id="age"
+placeholder="Your age"
+required>
+
+<button type="button" onclick="nextQuestion()">
+Next ➜
+</button>
+
+</div>
+
+<!-- Question 3 -->
+
+<div class="question">
+
+<h2>What do you like? ❤️</h2>
+
+<label>
+
+<input type="checkbox" value="Cooking">
+
+Cooking 🍳
+
+</label>
+
+<label>
+
+<input type="checkbox" value="Sleeping">
+
+Sleeping 😴
+
+</label>
+
+<label>
+
+<input type="checkbox" value="Reading">
+
+Reading 📚
+
+</label>
+
+<label>
+
+<input type="checkbox" value="Listening to Music">
+
+Listening to Music 🎵
+
+</label>
+
+<button type="button" onclick="nextQuestion()">
+Next ➜
+</button>
+
+</div>
+
+<!-- Question 4 -->
+
+<div class="question">
+
+<h2>Do you want to hang out with me? ❤️</h2>
+
+<button
+type="button"
+onclick="nextQuestion()">
+YES ❤️
+</button>
+
+<button
+type="button"
+id="noBtn">
+NO 😈
+</button>
+
+</div>
+
+<!-- Question 5 -->
+
+<div class="question">
+
+<h2>Choose Date 📅</h2>
+
+<select id="date">
+
+<option>04/08/2026</option>
+
+<option>05/08/2026</option>
+
+<option>06/08/2026</option>
+
+<option>07/08/2026</option>
+
+</select>
+
+<button type="button" onclick="nextQuestion()">
+Next ➜
+</button>
+
+</div>
